@@ -1,2 +1,11 @@
-package com.honey.scrapper.scrapper;public interface Scrapper {
+package com.honey.scrapper.scrapper;
+
+import org.jsoup.nodes.Document;
+
+public interface Scrapper {
+    void scrap();
+
+    void extractPagination(Document document);
+
+    Document extractDocument();
 }
