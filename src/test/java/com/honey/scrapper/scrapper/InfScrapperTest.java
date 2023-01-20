@@ -2,12 +2,17 @@ package com.honey.scrapper.scrapper;
 
 import org.junit.jupiter.api.Test;
 
-class DcScrapperTest {
+class InfScrapperTest {
 
-    InfScrapper dcScrapper = new InfScrapper("https://www.dcinside.com/");
+    InfScrapper infScrapper = new InfScrapper();
 
     @Test
     void scrap() {
-        dcScrapper.scrap();
+        infScrapper.scrap();
+    }
+
+    @Test
+    void extractPagination() {
+        infScrapper.extractPagination(infScrapper.extractDocument());
     }
 }
