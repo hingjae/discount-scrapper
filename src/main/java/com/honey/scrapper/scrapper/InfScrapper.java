@@ -23,10 +23,11 @@ public class DcScrapper {
 
     public void scrap() {
         Document document = extractDocument();
-        Elements tableHeader = document.select("div.time_best");
-        Elements title = tableHeader.select("div.tablist");
-        for (Element element : title) {
-            System.out.println("element = " + element.text());
+        Elements timeBest = document.select("div.time_best");
+        Elements contentList = timeBest.select("ul.p_1");
+        System.out.println("contentList = " + contentList);
+        for (Element element : contentList) {
+//            System.out.println("element = " + element.text());
         }
     }
 
