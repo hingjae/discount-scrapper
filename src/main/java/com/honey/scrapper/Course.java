@@ -2,13 +2,13 @@ package com.honey.scrapper;
 
 public class Course {
     private String url;
-//    private String img;
+    //    private String img;
     private String title;
     private String instructor;
-    private int price;
+    private String price;
     private String discountPercent;
 
-    public Course(String url, String title, String instructor, int price, String discountPercent) {
+    public Course(String url, String title, String instructor, String price, String discountPercent) {
         this.url = url;
         this.title = title;
         this.instructor = instructor;
@@ -40,11 +40,11 @@ public class Course {
         this.instructor = instructor;
     }
 
-    public int getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
