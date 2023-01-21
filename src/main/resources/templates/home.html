@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>honey</title>
+</head>
+<body>
+<div class="container">
+    <div>
+        <table>
+            <thead>
+            <tr>
+                <th></th>
+                <th>이름</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="course : ${courses}">
+                <td><a th:href="@{https://www.inflearn.com{url}(url = ${course.url})}" th:text="${course.title}"></a></td>
+                <td th:text="${course.instructor}"></td>
+                <td th:text="${course.price}"></td>
+                <td th:text="${course.discountPercentage}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- /container -->
+</body>
+</html>
