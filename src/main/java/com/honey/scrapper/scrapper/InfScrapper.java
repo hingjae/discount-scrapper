@@ -1,7 +1,9 @@
 package com.honey.scrapper.scrapper;
 
 import com.honey.scrapper.Course;
+import com.honey.scrapper.CourseList;
 import com.honey.scrapper.url.Url;
+import com.honey.scrapper.url.UrlBuilder;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -15,43 +17,43 @@ import java.util.Map;
 public class InfScrapper implements Scrapper {
 
     private String url = Url.INFLEARN.getText();
-    private Connection conn;
 
-    public InfScrapper() {
-        this.conn = Jsoup.connect(url);
-    }
+    private CourseList courseList = new CourseList();
 
     @Override
-    public void scrap() {
-        Document document = extractDocument();
+    public void scrap(Document document) {
         Elements timeDiscounted = document.select("div.courses_container");
         Elements courses = timeDiscounted.select("div.card");
         Elements coursesAtags = courses.select("a.course_card_front");
 
-        extractInfo(coursesAtags);
-    }
-
-    private void extractInfo(Elements coursesAtags) {
         for (Element info : coursesAtags) {
-            String url = info.select("a.course_card_front").attr("href");
-            String title = info.select("div.course_title").text();
-            String instructor = info.select("div.instructor").text();
-            String price = info.select("div.price").text();
-            String discountPercent = info.select("div.course_card_ribbon").text();
-            Course course = new Course(url, title, instructor, Integer.parseInt(price), discountPercent);
+            Course course = extractInfo(info);
+            courseList.addItem(course);
         }
     }
 
     @Override
-    public void extractPagination(Document document) {
-        Elements pagination = document.select("nav.pagination");
-        int pageLength = pagination.select("ul.pagination-list").select("li").size();
-        System.out.println("pagination = " + pagination);
-        System.out.println("pageLength = " + pageLength);
+    public Course extractInfo(Element info) {
+        String url = info.select("a.course_card_front").attr("href");
+        String title = info.select("div.course_title").text();
+        String instructor = info.select("div.instructor").text();
+        String price = info.select("div.price").text();
+        String discountPercent = info.select("div.course_card_ribbon").text();
+
+        return new Course(url, title, instructor, price, discountPercent);
     }
 
     @Override
-    public Document extractDocument() {
+    public int extractPagination(Document document) {
+        Elements pagination = document.select("nav.pagination");
+        int pageLength = pagination.select("ul.pagination-list").select("li").size();
+        System.out.println("pageLength = " + pageLength);
+        return pageLength;
+    }
+
+    @Override
+    public Document extractDocument(String url) {
+        Connection conn = Jsoup.connect(url);
         try {
             Document document = conn.get();
             return document;
@@ -60,4 +62,8 @@ public class InfScrapper implements Scrapper {
         }
     }
 
+    @Override
+    public CourseList getCourseList() {
+        return courseList;
+    }
 }
