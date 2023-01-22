@@ -11,7 +11,7 @@ class UrlBuilderTest {
     @Test
     void 다음페이지_url_추출() {
         String url = "https://www.inflearn.com/courses?discounted=true&order=seq";
-        String newUrl = urlBuilder.pageUp(url, 1);
+        String newUrl = urlBuilder.pageUp(url, 3);
         System.out.println("newUrl = " + newUrl);
     }
 }
