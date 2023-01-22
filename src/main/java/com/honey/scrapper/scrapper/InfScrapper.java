@@ -47,7 +47,6 @@ public class InfScrapper implements Scrapper {
     public int extractPagination(Document document) {
         Elements pagination = document.select("nav.pagination");
         int pageLength = pagination.select("ul.pagination-list").select("li").size();
-        System.out.println("pageLength = " + pageLength);
         return pageLength;
     }
 
