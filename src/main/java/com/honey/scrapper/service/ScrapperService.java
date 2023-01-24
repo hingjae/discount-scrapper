@@ -16,8 +16,14 @@ import java.util.List;
 @Service
 public class ScrapperService {
 
-    ApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
-    Scrapper scrapper = ac.getBean("scrapper", Scrapper.class);
+//    ApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
+//    Scrapper scrapper = ac.getBean("scrapper", Scrapper.class);
+    private final Scrapper scrapper;
+
+    @Autowired
+    public ScrapperService(Scrapper scrapper) {
+        this.scrapper = scrapper;
+    }
 
     String infUrl = Url.INFLEARN.getText();
 

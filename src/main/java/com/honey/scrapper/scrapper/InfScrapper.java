@@ -9,11 +9,13 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+@Component
 public class InfScrapper implements Scrapper {
 
     private String url = Url.INFLEARN.getText();
@@ -35,12 +37,13 @@ public class InfScrapper implements Scrapper {
     @Override
     public Course extractInfo(Element info) {
         String url = info.select("a.course_card_front").attr("href");
+        String imgUrl = info.select("img").attr("src");
         String title = info.select("div.course_title").text();
         String instructor = info.select("div.instructor").text();
-        String price = info.select("div.price").text();
+        String price = info.select("div.price del").text();
+        String discountPrice = info.select("div.price span").text();
         String discountPercent = info.select("div.course_card_ribbon").text();
-
-        return new Course(url, title, instructor, price, discountPercent);
+        return new Course(url, imgUrl, title, instructor, price, discountPrice, discountPercent);
     }
 
     @Override
