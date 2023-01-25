@@ -84,7 +84,7 @@
                                     <del th:text="${course.price}"></del>
                                     <span th:text="${course.discountPrice}"></span>
                                 </small>
-                                <h6 th:text="${course.discountPercentage}"></h6>
+                                <h6 th:text="${course.discountPercent}"></h6>
                             </div>
                         </a>
                     </div>
@@ -93,32 +93,6 @@
         </div>
     </div>
 </main>
-<!--
-<div class="container">
-    <div>
-        <table>
-            <thead>
-            <tr>
-                <th>title</th>
-                <th>instructor</th>
-                <th>price</th>
-                <th>discount</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="course : ${courses}">
-                <td><a th:href="@{https://www.inflearn.com{url}(url = ${course.url})}" th:text="${course.title}"></a>
-                </td>
-                <td th:text="${course.instructor}"></td>
-                <td th:text="${course.price}"></td>
-                <td th:text="${course.discountPercentage}"></td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
--->
-<!-- /container -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
         crossorigin="anonymous"></script>
