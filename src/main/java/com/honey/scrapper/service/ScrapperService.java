@@ -28,6 +28,11 @@ public class ScrapperService {
     String infUrl = Url.INFLEARN.getText();
 
     public List<Course> loadPage() {
+        List<Course> courses = getCourses();
+        return courses;
+    }
+
+    private List<Course> getCourses() {
         Document document = scrapper.extractDocument(infUrl);
         int pageLength = scrapper.extractPagination(document);
         for (int i = 1; i <= pageLength; i++) {
