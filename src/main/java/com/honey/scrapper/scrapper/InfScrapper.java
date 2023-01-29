@@ -1,26 +1,44 @@
 package com.honey.scrapper.scrapper;
 
 import com.honey.scrapper.Course;
-import com.honey.scrapper.CourseList;
-import com.honey.scrapper.url.Url;
-import com.honey.scrapper.url.UrlBuilder;
+import com.honey.scrapper.repository.CourseRepository;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 @Component
 public class InfScrapper implements Scrapper {
 
-    private String url = Url.INFLEARN.getText();
+    private final CourseRepository courseRepository;
 
-    private CourseList courseList = new CourseList();
+    @Autowired
+    public InfScrapper(CourseRepository courseRepository) {
+        this.courseRepository = courseRepository;
+    }
+
+    @Override
+    public Document extractDocument(String url) {
+        Connection conn = Jsoup.connect(url);
+        try {
+            Document document = conn.get();
+            return document;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public int extractPagination(Document document) {
+        Elements pagination = document.select("nav.pagination");
+        int pageLength = pagination.select("ul.pagination-list").select("li").size();
+        return pageLength;
+    }
 
     @Override
     public void scrap(Document document) {
@@ -30,7 +48,7 @@ public class InfScrapper implements Scrapper {
 
         for (Element info : coursesAtags) {
             Course course = extractInfo(info);
-            courseList.addItem(course);
+            courseRepository.save(course);
         }
     }
 
@@ -46,26 +64,4 @@ public class InfScrapper implements Scrapper {
         return new Course(url, imgUrl, title, instructor, price, discountPrice, discountPercent);
     }
 
-    @Override
-    public int extractPagination(Document document) {
-        Elements pagination = document.select("nav.pagination");
-        int pageLength = pagination.select("ul.pagination-list").select("li").size();
-        return pageLength;
-    }
-
-    @Override
-    public Document extractDocument(String url) {
-        Connection conn = Jsoup.connect(url);
-        try {
-            Document document = conn.get();
-            return document;
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    @Override
-    public CourseList getCourseList() {
-        return courseList;
-    }
 }
