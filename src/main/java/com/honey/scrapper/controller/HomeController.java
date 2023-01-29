@@ -20,9 +20,20 @@ public class HomeController {
     }
 
     @GetMapping("/")
-    public String home(Model model) {
+    public String home() {
+        return "index";
+    }
+
+    @GetMapping("/inflearn-courses")
+    public String inflearnCourses(Model model) {
         List<Course> courses = scrapperService.loadPage();
         model.addAttribute("courses", courses);
-        return "home";
+        return "inflearnCourses";
+    }
+
+    @GetMapping("inflearn-courses-load")
+    public String inflearnCoursesLoad() {
+        List<Course> courses = scrapperService.getCourses();
+        return "redirect:/inflearn-courses";
     }
 }
