@@ -68,6 +68,26 @@
 <main>
     <div class="album py-5 bg-light">
         <div class="container">
+            <a href="inflearn-courses-load">
+                <button type="button" class="btn btn-light" th:text="Refresh">
+                    <svg
+                            href="@{http://www.w3.org/2000/svg}"
+                            width="16"
+                            height="16"
+                            fill="currentColor"
+                            class="bi bi-arrow-counterclockwise"
+                            viewBox="0 0 16 16"
+                    >
+                        <path
+                                fill-rule="evenodd"
+                                d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z"
+                        />
+                        <path
+                                d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z"
+                        />
+                    </svg>
+                </button>
+            </a>
             <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 g-3">
                 <div class="col" th:each="course : ${courses}">
                     <div class="card shadow-sm" style="width: 18rem">
