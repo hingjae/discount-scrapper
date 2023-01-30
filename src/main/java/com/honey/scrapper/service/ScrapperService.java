@@ -7,9 +7,6 @@ import com.honey.scrapper.url.Url;
 import com.honey.scrapper.url.UrlBuilder;
 import lombok.RequiredArgsConstructor;
 import org.jsoup.nodes.Document;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,7 +16,7 @@ import java.util.List;
 public class ScrapperService {
 
     //    ApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
-//    Scrapper scrapper = ac.getBean("scrapper", Scrapper.class);
+    //    Scrapper scrapper = ac.getBean("scrapper", Scrapper.class);
     private final Scrapper scrapper;
     private final CourseRepository courseRepository;
 
@@ -43,5 +40,9 @@ public class ScrapperService {
         }
         List<Course> courses = courseRepository.findAllCourses();
         return courses;
+    }
+
+    public void refresh() {
+        courseRepository.clear();
     }
 }
