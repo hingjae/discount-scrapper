@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 @Repository
-public class MemoryCourseRepository implements CourseRepository{
+public class MemoryCourseRepository implements CourseRepository {
     private final static Map<Long, Course> store = new HashMap<>();
     private static Long courseId = 0L;
 
@@ -22,5 +22,10 @@ public class MemoryCourseRepository implements CourseRepository{
     @Override
     public List<Course> findAllCourses() {
         return new ArrayList<>(store.values());
+    }
+
+    @Override
+    public void clear() {
+        store.clear();
     }
 }

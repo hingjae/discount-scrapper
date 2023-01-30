@@ -33,7 +33,7 @@ public class HomeController {
 
     @GetMapping("inflearn-courses-load")
     public String inflearnCoursesLoad() {
-        List<Course> courses = scrapperService.getCourses();
+        scrapperService.refresh();
         return "redirect:/inflearn-courses";
     }
 }
