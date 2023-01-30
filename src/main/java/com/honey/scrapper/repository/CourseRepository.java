@@ -8,4 +8,6 @@ public interface CourseRepository {
     Course save(Course course);
 
     List<Course> findAllCourses();
+
+    void clear();
 }
