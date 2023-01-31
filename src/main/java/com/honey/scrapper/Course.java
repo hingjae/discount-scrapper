@@ -10,7 +10,7 @@ public class Course {
     private String imgUrl;
     private String title;
     private String instructor;
-    private String price;
+    private String price; // 나중에 타입 수정해야함.
     private String discountPrice;
     private String discountPercent;
 
