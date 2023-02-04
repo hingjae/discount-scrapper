@@ -1,11 +1,12 @@
 package com.honey.scrapper.controller;
 
-import com.honey.scrapper.Course;
+import com.honey.scrapper.domain.Course;
 import com.honey.scrapper.service.ScrapperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
@@ -26,8 +27,8 @@ public class CourseController {
         return "inflearnCourses";
     }
 
-    @GetMapping("inflearn-courses-load")
-    public String inflearnCoursesLoad() {
+    @PostMapping("inflearn-courses-reload")
+    public String inflearnCoursesReload() {
         scrapperService.refresh();
         return "redirect:/inflearn-courses";
     }
