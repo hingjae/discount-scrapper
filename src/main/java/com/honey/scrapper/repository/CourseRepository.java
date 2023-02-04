@@ -1,6 +1,6 @@
 package com.honey.scrapper.repository;
 
-import com.honey.scrapper.Course;
+import com.honey.scrapper.domain.Course;
 
 import java.util.List;
 
