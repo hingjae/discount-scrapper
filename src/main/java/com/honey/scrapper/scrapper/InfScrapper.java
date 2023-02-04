@@ -1,6 +1,6 @@
 package com.honey.scrapper.scrapper;
 
-import com.honey.scrapper.Course;
+import com.honey.scrapper.domain.Course;
 import com.honey.scrapper.repository.CourseRepository;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
