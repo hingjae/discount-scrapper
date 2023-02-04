@@ -1,4 +1,4 @@
-package com.honey.scrapper;
+package com.honey.scrapper.domain;
 
 import lombok.Getter;
 import lombok.Setter;
