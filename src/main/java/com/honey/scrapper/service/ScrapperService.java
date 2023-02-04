@@ -1,16 +1,18 @@
 package com.honey.scrapper.service;
 
-import com.honey.scrapper.Course;
+import com.honey.scrapper.domain.Course;
 import com.honey.scrapper.repository.CourseRepository;
 import com.honey.scrapper.scrapper.Scrapper;
 import com.honey.scrapper.url.Url;
 import com.honey.scrapper.url.UrlBuilder;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.jsoup.nodes.Document;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class ScrapperService {
@@ -25,6 +27,7 @@ public class ScrapperService {
     public List<Course> loadPage() {
         if (courseRepository.findAllCourses().size() == 0) {
             List<Course> courses = getCourses();
+            log.info("total courses = {}", courseRepository.findAllCourses().size());
             return courses;
         }
         return courseRepository.findAllCourses();
