@@ -90,7 +90,7 @@
             </form>
             <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 g-3">
                 <div class="col" th:each="course : ${courses}">
-                    <div class="card shadow-sm" style="width: 18rem">
+                    <div th:object="${course}" class="card shadow-sm" style="width: 18rem">
                         <a th:href="@{https://www.inflearn.com{url}(url = ${course.url})}" class="btn">
                             <img
                                     th:src="${course.imgUrl}"

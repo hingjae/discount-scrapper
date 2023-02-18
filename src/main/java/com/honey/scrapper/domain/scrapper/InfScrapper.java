@@ -1,13 +1,15 @@
-package com.honey.scrapper.scrapper;
+package com.honey.scrapper.domain.scrapper;
 
-import com.honey.scrapper.domain.Course;
-import com.honey.scrapper.repository.CourseRepository;
+import com.honey.scrapper.domain.course.Course;
+import com.honey.scrapper.domain.course.WonPrice;
+import com.honey.scrapper.domain.course.repository.CourseRepository;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.support.DefaultFormattingConversionService;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -16,6 +18,7 @@ import java.io.IOException;
 public class InfScrapper implements Scrapper {
 
     private final CourseRepository courseRepository;
+    DefaultFormattingConversionService conversionService = new DefaultFormattingConversionService();
 
     @Autowired
     public InfScrapper(CourseRepository courseRepository) {

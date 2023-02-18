@@ -1,6 +1,6 @@
-package com.honey.scrapper.repository;
+package com.honey.scrapper.domain.course.repository;
 
-import com.honey.scrapper.domain.Course;
+import com.honey.scrapper.domain.course.Course;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;

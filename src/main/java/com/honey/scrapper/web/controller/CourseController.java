@@ -1,7 +1,7 @@
-package com.honey.scrapper.controller;
+package com.honey.scrapper.web.controller;
 
-import com.honey.scrapper.domain.Course;
-import com.honey.scrapper.service.ScrapperService;
+import com.honey.scrapper.domain.course.Course;
+import com.honey.scrapper.domain.service.ScrapperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

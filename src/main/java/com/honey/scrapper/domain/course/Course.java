@@ -1,4 +1,4 @@
-package com.honey.scrapper.domain;
+package com.honey.scrapper.domain.course;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -10,7 +10,8 @@ public class Course {
     private String imgUrl;
     private String title;
     private String instructor;
-    private String price; // 나중에 타입 수정해야함.
+    // 가격은 타입 수정해야함.
+    private String price;
     private String discountPrice;
     private String discountPercent;
 

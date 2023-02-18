@@ -1,8 +1,8 @@
-package com.honey.scrapper.service;
+package com.honey.scrapper.domain.service;
 
-import com.honey.scrapper.domain.Course;
-import com.honey.scrapper.repository.CourseRepository;
-import com.honey.scrapper.scrapper.Scrapper;
+import com.honey.scrapper.domain.course.Course;
+import com.honey.scrapper.domain.course.repository.CourseRepository;
+import com.honey.scrapper.domain.scrapper.Scrapper;
 import com.honey.scrapper.url.Url;
 import com.honey.scrapper.url.UrlBuilder;
 import lombok.RequiredArgsConstructor;
@@ -17,8 +17,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ScrapperService {
 
-    //    ApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
-    //    Scrapper scrapper = ac.getBean("scrapper", Scrapper.class);
     private final Scrapper scrapper;
     private final CourseRepository courseRepository;
 

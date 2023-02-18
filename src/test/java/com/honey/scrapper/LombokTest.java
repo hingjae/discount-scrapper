@@ -1,6 +1,6 @@
 package com.honey.scrapper;
 
-import com.honey.scrapper.domain.Course;
+import com.honey.scrapper.domain.course.Course;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
