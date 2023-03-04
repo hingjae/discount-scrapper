@@ -3,11 +3,11 @@ package com.honey.scrapper.domain.service;
 import com.honey.scrapper.domain.course.Course;
 import com.honey.scrapper.domain.course.repository.CourseRepository;
 import com.honey.scrapper.domain.scrapper.Scrapper;
-import com.honey.scrapper.url.Url;
 import com.honey.scrapper.url.UrlBuilder;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.nodes.Document;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,7 +20,8 @@ public class ScrapperService {
     private final Scrapper scrapper;
     private final CourseRepository courseRepository;
 
-    private final String infUrl = Url.INFLEARN.getText();
+    @Value("${inflearn.url}")
+    private String infUrl;
 
     public List<Course> loadPage() {
         if (courseRepository.findAllCourses().size() == 0) {

@@ -1,8 +1,10 @@
 package com.honey.scrapper.domain.scrapper;
 
 import com.honey.scrapper.domain.course.Course;
-import com.honey.scrapper.domain.course.WonPrice;
 import com.honey.scrapper.domain.course.repository.CourseRepository;
+import com.honey.scrapper.formatter.PriceFormatter;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -14,15 +16,19 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
+@Slf4j
 @Component
+@RequiredArgsConstructor
 public class InfScrapper implements Scrapper {
 
     private final CourseRepository courseRepository;
-    DefaultFormattingConversionService conversionService = new DefaultFormattingConversionService();
+    private final DefaultFormattingConversionService conversionService;
 
     @Autowired
     public InfScrapper(CourseRepository courseRepository) {
         this.courseRepository = courseRepository;
+        this.conversionService = new DefaultFormattingConversionService();
+        conversionService.addFormatter(new PriceFormatter());
     }
 
     @Override
@@ -40,6 +46,7 @@ public class InfScrapper implements Scrapper {
     public int extractPagination(Document document) {
         Elements pagination = document.select("nav.pagination");
         int pageLength = pagination.select("ul.pagination-list").select("li").size();
+        log.info("page = {}", pageLength);
         return pageLength;
     }
 
@@ -61,10 +68,18 @@ public class InfScrapper implements Scrapper {
         String imgUrl = info.select("img").attr("src");
         String title = info.select("div.course_title").text();
         String instructor = info.select("div.instructor").text();
-        String price = info.select("div.price del").text();
-        String discountPrice = info.select("div.price span").text();
-        String discountPercent = info.select("div.course_card_ribbon").text();
+        Long price = priceFormat(info.select("div.price del").text()); //"₩1,000"
+        Long discountPrice = priceFormat(info.select("div.price span").text()); //"₩1,000"
+        int discountPercent = (int) Math.round((1 - ((double)discountPrice/price)) * 100);
+//        String discountPercent = info.select("div.course_card_ribbon").text();
         return new Course(url, imgUrl, title, instructor, price, discountPrice, discountPercent);
+    }
+
+    private Long priceFormat(String price) {
+        int pos = price.indexOf("₩");
+        String removeWon = price.substring(pos + 1);
+        Long convertPrice = conversionService.convert(removeWon, Long.class);
+        return convertPrice;
     }
 
 }

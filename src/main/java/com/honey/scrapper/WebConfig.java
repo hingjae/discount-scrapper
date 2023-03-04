@@ -1,7 +1,6 @@
 package com.honey.scrapper;
 
-import com.honey.scrapper.converter.StringToIntegerConverter;
-import com.honey.scrapper.converter.StringToWonConverter;
+import com.honey.scrapper.formatter.PriceFormatter;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -11,7 +10,6 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addFormatters(FormatterRegistry registry) {
-        registry.addConverter(new StringToIntegerConverter());
-        registry.addConverter(new StringToWonConverter());
+        registry.addFormatter(new PriceFormatter());
     }
 }

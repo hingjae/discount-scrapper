@@ -3,6 +3,7 @@ package com.honey.scrapper.domain.course;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.format.annotation.NumberFormat;
 
 @Getter @Setter @ToString
 public class Course {
@@ -11,14 +12,16 @@ public class Course {
     private String title;
     private String instructor;
     // 가격은 타입 수정해야함.
-    private String price;
-    private String discountPrice;
-    private String discountPercent;
+    @NumberFormat(pattern = "###,###")
+    private Long price;
+    @NumberFormat(pattern = "###,###")
+    private Long discountPrice;
+    private double discountPercent;
 
     public Course() {
     }
 
-    public Course(String url, String imgUrl, String title, String instructor, String price, String discountPrice, String discountPercent) {
+    public Course(String url, String imgUrl, String title, String instructor, Long price, Long discountPrice, double discountPercent) {
         this.url = url;
         this.imgUrl = imgUrl;
         this.title = title;

@@ -101,8 +101,8 @@
                                 <h6 class="card-title text-truncate" th:text="${course.title}"></h6>
                                 <p th:text="${course.instructor}"></p>
                                 <small>
-                                    <del th:text="${course.price}"></del>
-                                    <span th:text="${course.discountPrice}"></span>
+                                    <del th:text="'₩' + ${{course.price}}"></del>
+                                    <span th:text="'₩' + ${{course.discountPrice}}"></span>
                                 </small>
                                 <h6 th:text="${course.discountPercent}"></h6>
                             </div>
